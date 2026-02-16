@@ -1,4 +1,4 @@
-* and all # 🚀 SmartBookmark - Real-Time Link Manager
+# 🚀 SmartBookmark - Real-Time Link Manager
 
 SmartBookmark is a minimal, high-performance web application designed to help individuals and teams organize their digital footprint. Built with **Next.js 15**, **Supabase**, and **Tailwind CSS**, it features instant UI updates, prefix-based search, and secure Google Authentication.
 
