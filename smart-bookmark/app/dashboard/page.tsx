@@ -1,9 +1,9 @@
 "use client";
 
 import { supabase } from "@/lib/supabase";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Plus, Trash2, Search, ExternalLink, LogOut, X, Edit2 } from "lucide-react";
+import { Plus, Trash2, Search, ExternalLink, LogOut, X, Edit2, User } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Dashboard() {
@@ -11,6 +11,10 @@ export default function Dashboard() {
   const [user, setUser] = useState<any>(null);
   const [bookmarks, setBookmarks] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // Profile Dropdown State
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   // Modal States
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,6 +37,17 @@ export default function Dashboard() {
     getUser();
   }, [router]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const fetchBookmarks = async () => {
     const { data } = await supabase
       .from("bookmarks")
@@ -41,26 +56,29 @@ export default function Dashboard() {
     setBookmarks(data || []);
   };
 
+  // Get user initials for avatar
+  const getUserInitials = () => {
+    if (!user?.email) return "U";
+    return user.email.charAt(0).toUpperCase();
+  };
+
   // Prefix Search Logic
   const filteredBookmarks = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
     if (!query) return bookmarks;
     return bookmarks.filter((b) => {
       const titleMatch = b.title.toLowerCase().startsWith(query);
-      // Strips http/www to allow prefix matching on the domain name itself
       const cleanUrl = b.url.toLowerCase().replace(/^(https?:\/\/)?(www\.)?/, "");
       const urlMatch = b.url.toLowerCase().startsWith(query) || cleanUrl.startsWith(query);
       return titleMatch || urlMatch;
     });
   }, [bookmarks, searchQuery]);
 
-  // Handle Add or Update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     if (editingId) {
-      // Update Logic
       const { error } = await supabase
         .from("bookmarks")
         .update({ title, url })
@@ -71,7 +89,6 @@ export default function Dashboard() {
         closeModal();
       }
     } else {
-      // Add Logic
       const { data, error } = await supabase
         .from("bookmarks")
         .insert({ title, url, user_id: user.id })
@@ -120,11 +137,60 @@ export default function Dashboard() {
             <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">SB</div>
             <span className="font-bold text-gray-700">Dashboard</span>
           </div>
+          
           <div className="flex items-center gap-4">
-            <button onClick={() => setIsModalOpen(true)} className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition">
+            <button 
+              onClick={() => setIsModalOpen(true)} 
+              className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
+            >
               <Plus size={16} /> Add
             </button>
-            <button onClick={handleLogout} className="text-gray-500 hover:text-red-600 transition"><LogOut size={20}/></button>
+            
+            {/* Google-Style Profile Dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-semibold text-lg flex items-center justify-center hover:shadow-lg transition-all duration-200 border-2 border-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                {getUserInitials()}
+              </button>
+
+              {/* Dropdown Menu */}
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                  {/* User Info Section */}
+                  <div className="px-4 py-3 border-b border-gray-100">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-semibold text-xl flex items-center justify-center">
+                        {getUserInitials()}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-gray-900 truncate">
+                          {user.user_metadata?.full_name || "User"}
+                        </p>
+                        <p className="text-sm text-gray-500 truncate">
+                          {user.email}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsProfileOpen(false);
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition-colors"
+                    >
+                      <LogOut size={16} className="text-gray-500" />
+                      <span>Sign out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
