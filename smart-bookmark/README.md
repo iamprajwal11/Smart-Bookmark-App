@@ -13,7 +13,7 @@ SmartBookmark is a minimal, high-performance web application designed to help in
 
 ## ✨ Key Features
 
-* ⚡ Real-Time Sync:** Add, edit, or delete bookmarks and see changes instantly without refreshing the page.
+* ⚡ Real-Time Sync: Add, edit, or delete bookmarks and see changes instantly without refreshing the page.
 * 🔍 Smart Prefix Search: Find links faster with a search engine optimized for start-of-string matching.
 * **🔐 Google OAuth:** Secure one-click login powered by Supabase Auth.
 * **📱 Compact UI:** A distraction-free, responsive dashboard with optimized modals for a better user experience.
