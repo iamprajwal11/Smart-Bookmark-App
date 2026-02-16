@@ -1,89 +1,41 @@
-# 🚀 SmartBookmark – Real-Time Link Manager
+its showing markup i dont want it * and all # 🚀 SmartBookmark - Real-Time Link Manager
 
-SmartBookmark is a minimal, high-performance web application designed to help individuals and teams organize their digital footprint. Built with Next.js 15, Supabase, and Tailwind CSS, it features instant UI updates, prefix-based search, and secure Google authentication.
-
----
+SmartBookmark is a minimal, high-performance web application designed to help individuals and teams organize their digital footprint. Built with **Next.js 15**, **Supabase**, and **Tailwind CSS**, it features instant UI updates, prefix-based search, and secure Google Authentication.
 
 ## 📸 Preview
 
 ### Landing Page
+<img src="public/screenshots/Screenshot 2026-02-16 224544.png" width="100%" />
 
-<img src="public/screenshots/Screenshot-2026-02-16-224544.png" width="100%" alt="Landing Page" />
 
-### Personal Dashboard
-
-<img src="public/screenshots/Screenshot-2026-02-16-224447.png" width="100%" alt="Dashboard" />
 
 ---
 
 ## ✨ Key Features
 
-✔️ Real-time sync – Add, edit, or delete bookmarks and see changes instantly without refreshing the page
-✔️ Smart prefix search – Quickly find links with optimized search
-✔️ Secure authentication – Google OAuth powered by Supabase
-✔️ Compact modern UI – Clean, responsive dashboard
-✔️ Full CRUD – Create, read, update, and delete bookmarks
+* ⚡ Real-Time Sync:** Add, edit, or delete bookmarks and see changes instantly without refreshing the page.
+* 🔍 Smart Prefix Search: Find links faster with a search engine optimized for start-of-string matching.
+* **🔐 Google OAuth:** Secure one-click login powered by Supabase Auth.
+* **📱 Compact UI:** A distraction-free, responsive dashboard with optimized modals for a better user experience.
+* **🛠 CRUD Operations:** Full ability to Create, Read, Update, and Delete your saved links.
 
 ---
 
 ## 🛠 Tech Stack
 
-Next.js – React framework with App Router
-Supabase – Backend-as-a-service (database + authentication)
-Tailwind CSS – Modern UI and responsive styling
-Vercel – Deployment and hosting
+| Technology | Use Case |
+| :--- | :--- |
+| **Next.js** | React Framework (App Router) |
+| **Supabase** | Backend-as-a-Service (Database & Auth) |
+| **Tailwind CSS** | Styling and Responsive Design |
+| **Vercel** | Production Hosting |
 
 ---
 
 ## 🚀 Getting Started
 
-### 1. Clone and install
-
+### 1. Clone and Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/Smart-Bookmark-App.git
-cd Smart-Bookmark-App
+git clone [https://github.com/YOUR_USERNAME/smart-bookmark.git](https://github.com/YOUR_USERNAME/smart-bookmark.git)
+cd smart-bookmark
 npm install
-```
-
-### 2. Setup environment
-
-Create a `.env.local` file and add your Supabase keys:
-
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_url  
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key  
-```
-
-### 3. Run the project
-
-```bash
-npm run dev
-```
-
----
-
-## 🔐 Authentication
-
-This project uses Supabase authentication with Google OAuth for secure login.
-
----
-
-## 📌 Future Improvements
-
-• Bookmark collections and folders
-• Tags and smart categorization
-• Team collaboration
-• Dark mode
-• Browser extension
-
----
-
-## 👨‍💻 Author
-
-Prajwal Lute
-
----
-
-## ⭐ Support
-
-If you like this project, please consider giving it a star on GitHub.
