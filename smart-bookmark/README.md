@@ -8,7 +8,7 @@ SmartBookmark is a minimal, high-performance web application designed to help in
 [Landing Page Hero Section](/public/screenshots/Screenshot 2026-02-16 224544.png)
 
 ### Personal Dashboard
-![User Dashboard](/public/screenshots/Screenshot 2026-02-16 224447.png)
+![User Dashboard]([/public/screenshots/Screenshot 2026-02-16 224447.png](https://github.com/iamprajwal11/Smart-Bookmark-App/blob/main/smart-bookmark/public/screenshots/Screenshot%202026-02-16%20224447.png))
 
 ---
 
