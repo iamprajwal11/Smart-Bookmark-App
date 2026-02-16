@@ -5,7 +5,7 @@ SmartBookmark is a minimal, high-performance web application designed to help in
 ## 📸 Preview
 
 ### Landing Page
-[Landing Page Hero Section](/public/screenshots/Screenshot 2026-02-16 224544.png)
+<img src="public/screenshots/Screenshot 2026-02-16 224544.png" width="100%" />
 
 ### Personal Dashboard
 ![User Dashboard]([/public/screenshots/Screenshot 2026-02-16 224447.png](https://github.com/iamprajwal11/Smart-Bookmark-App/blob/main/smart-bookmark/public/screenshots/Screenshot%202026-02-16%20224447.png))
